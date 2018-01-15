@@ -1,0 +1,62 @@
+//
+// Author: Timothy Baker
+// cs361: Assignment 2
+//"A story of Mites and Stars"
+//
+//star.cpp
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include "star.h"
+
+
+     ///////////////////////////////////////////////////////////////////
+	// slipping time
+     ///////////////////////////////////////////////////////////////////
+	void star::slipping_time(double i, double j, double k, int id)
+	{
+		if(((x>=nx-5 && x <=nx+5) && (y>=ny-5 && y <=ny+5) && (z>=nz-5 && z <=nz+5))||(clock==0))
+		{
+			if(clock!=0)
+			{
+				x=nx;y=ny;z=nz; //gravity got them
+			}
+
+			if(predation==true)
+			{
+				predation=false;
+			}
+			if(1)
+			{
+
+				set_next_node_xyz(i, j, k);
+		          distance=sqrt(pow((x-nx),2.0)+pow((y-ny),2.0)+ pow((z-nz),2.0));
+				pace=distance/speed;
+
+				a=(nx-x)/pace;
+				b=(ny-y)/pace;
+				c=(nz-z)/pace;
+
+				last_node_id=current_node_id;
+				set_next_node_id(id);
+			}
+		}
+		else
+		{
+			move(); 
+		}
+		clock++;
+	}
+
+     ///////////////////////////////////////////////////////////////////
+	// move definition
+     ///////////////////////////////////////////////////////////////////
+	//
+	void star::move()
+	{
+		x=a + x;
+		y=b + y;
+		z=c + z;
+	}
